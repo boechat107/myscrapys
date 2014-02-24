@@ -13,3 +13,7 @@ NEWSPIDER_MODULE = 'myscrapys.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'myscrapys (+http://www.yourdomain.com)'
+
+## My configuration
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_DEBUG = True

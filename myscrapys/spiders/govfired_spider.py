@@ -34,4 +34,6 @@ class GovFiredSpider(CrawlSpider):
         [item['department'], item['uf']] = desctab[6:8].xpath("text()").extract()
         item['reason'] = desctab[8].xpath("text()").extract()
 
+        return item
+
 
