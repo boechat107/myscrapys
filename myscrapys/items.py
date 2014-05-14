@@ -5,6 +5,7 @@
 
 from scrapy.item import Item, Field
 
+
 class GovFiredItem(Item):
     name = Field()
     cpf = Field()
@@ -15,3 +16,22 @@ class GovFiredItem(Item):
     punishment = Field()
     uf = Field()
     reason = Field()
+
+
+class IptuCuritibaItem(Item):
+    registration_number = Field()
+    sublote = Field()
+    owner = Field()
+    address_street = Field()
+    neighborhood = Field()
+
+    def __setitem__(self, key, value):
+        if key in self.fields:
+            field = self.fields[key]
+            
+            if isinstance(value, str) or isinstance(value, unicode):
+                value = value.strip()
+            self._values[key] = value
+        else:
+            raise KeyError("%s does not support field: %s" %
+                (self.__class__.__name__, key))
