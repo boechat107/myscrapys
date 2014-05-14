@@ -11,9 +11,11 @@ class IptuCuritibaSpider(Spider):
         self.start_urls = self.generate_urls()
 
     def generate_urls(self):
+        """Generate a list of URLs to be scraped.
+        """
         url_base = "http://www2.curitiba.pr.gov.br/gtm/iptu/carnet/frmRel.Carnet.aspx?txtInscrImob=%s&txtInscrSublote=%s"
         main_template = "662007400%s00" # 2 digits
-        urls = []
+        ## TODO: specify the range by command line.
         for i in range(30, 34):
             main = main_template % i
             main = main + str(self.dv(main))
@@ -22,6 +24,8 @@ class IptuCuritibaSpider(Spider):
             yield url_base % (main, sublote)
 
     def dv(self, numStr):
+        """Calculates the digit verifier.
+        """
         sum = 0
         for x in range(1,13):
             sum = sum + int(numStr[13-x])*x
