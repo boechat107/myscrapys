@@ -6,18 +6,25 @@ from myscrapys.items import IptuCuritibaItem
 class IptuCuritibaSpider(Spider):
     name = "iptuCuritiba"
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, start=0, end=100, *args, **kwargs):
         super(IptuCuritibaSpider, self).__init__(*args, **kwargs)
-        self.start_urls = self.generate_urls()
+        self.start_urls = self.generate_urls(int(start), int(end))
 
-    def generate_urls(self):
+    def generate_urls(self, start, end):
         """Generate a list of URLs to be scraped.
+        This function is intended to be modified frequently, mainly the
+        template number. Its only flexibility is the given range of values to
+        be inserted into the template.
         """
+        assert end > start 
+        rangeNdigits = 4
+        ## Registration number template without DV and sublote.
+        strnum_template = "6630059%s00" # 4 digits
+        assert end < 10**rangeNdigits, "Improper range"
         url_base = "http://www2.curitiba.pr.gov.br/gtm/iptu/carnet/frmRel.Carnet.aspx?txtInscrImob=%s&txtInscrSublote=%s"
-        main_template = "662007400%s00" # 2 digits
-        ## TODO: specify the range by command line.
-        for i in range(30, 34):
-            main = main_template % i
+        for i in range(start, end):
+            rangeNum = str(i).zfill(rangeNdigits)
+            main = strnum_template % rangeNum
             main = main + str(self.dv(main))
             sublote = '000'
             self.log("Registration number: %s|%s" % (main, sublote))
