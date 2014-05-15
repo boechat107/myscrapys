@@ -19,6 +19,6 @@ AUTOTHROTTLE_ENABLED = True
 AUTOTHROTTLE_DEBUG = True
 
 ## Pipelines
-ITEM_PIPELINES = {
-    'myscrapys.pipelines.StringCleanerPipeline': 300
-}
+# ITEM_PIPELINES = {
+#     'myscrapys.pipelines.StringCleanerPipeline': 300
+# }
