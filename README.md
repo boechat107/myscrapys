@@ -17,3 +17,11 @@ information like occupation, department, reasons...).
 * Not implemented yet:
     + There is no data treatment yet (there are empty spaces of fields).
     + Only the first page is captured for now (it should be solved very soon).
+
+### IptuCuritibaSpider
+
+It is intended to scrape information about properties of 
+[Curitiba city](http://www2.curitiba.pr.gov.br/gtm/iptu/carnet/default.aspx).
+
+* Not all data is been scraped, more fields need to be added.
+* It's very hard to generate existent register numbers.
