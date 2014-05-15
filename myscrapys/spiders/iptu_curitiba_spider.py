@@ -19,7 +19,7 @@ class IptuCuritibaSpider(Spider):
         assert end > start 
         rangeNdigits = 4
         ## Registration number template without DV and sublote.
-        strnum_template = "6630059%s00" # 4 digits
+        strnum_template = "6630058%s00" # 4 digits
         assert end < 10**rangeNdigits, "Improper range"
         url_base = "http://www2.curitiba.pr.gov.br/gtm/iptu/carnet/frmRel.Carnet.aspx?txtInscrImob=%s&txtInscrSublote=%s"
         for i in range(start, end):
@@ -46,9 +46,12 @@ class IptuCuritibaSpider(Spider):
         if exist == 'Erro':
             item['registration_number'] = 'not found'
         else:
+            ## Control information.
             fiscal = sel.xpath('//div[@class="tam10neg"]/text()').extract()
             item['registration_number'] = fiscal[0]
             item['sublote'] = fiscal[1]
+            item['nature'] = fiscal[4]
+            ## Owner and address information.
             info = sel.xpath('//td[@class="tam10neg"]/text()').extract()
             item['owner'] = info[0]
             item['address_street'] = info[1]

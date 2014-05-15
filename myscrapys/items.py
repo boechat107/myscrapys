@@ -24,6 +24,7 @@ class IptuCuritibaItem(Item):
     owner = Field()
     address_street = Field()
     neighborhood = Field()
+    nature = Field()
 
     def __setitem__(self, key, value):
         if key in self.fields:
