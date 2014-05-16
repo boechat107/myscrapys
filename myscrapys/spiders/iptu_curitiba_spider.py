@@ -19,10 +19,13 @@ class IptuCuritibaSpider(Spider):
         assert end > start 
         rangeNdigits = 4
         ## Registration number template without DV and sublote.
-        strnum_template = "6630058%s00" # 4 digits
+        strnum_template = "6630057%s00" # 4 digits
         assert end < 10**rangeNdigits, "Improper range"
         url_base = "http://www2.curitiba.pr.gov.br/gtm/iptu/carnet/frmRel.Carnet.aspx?txtInscrImob=%s&txtInscrSublote=%s"
         for i in range(start, end):
+            ## Only even numbers are gonna be analysed.
+            if i % 2 != 0:
+                continue
             rangeNum = str(i).zfill(rangeNdigits)
             main = strnum_template % rangeNum
             main = main + str(self.dv(main))
